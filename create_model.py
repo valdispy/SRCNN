@@ -36,7 +36,7 @@ if __name__ == "__main__":
     _, height, width, channels = X_train_data.shape
     optimizer = Adam(learning_rate = 0.001, beta_1 = 0.9, beta_2 = 0.999, amsgrad = False)
     model.add(Convolution2D(filters = 64, kernel_size = (9, 9), padding = 'same', input_shape = (height, width, channels), activation = 'relu'))
-    model.add(Convolution2D(filters = 32, kernel_size = (1, 1), padding = 'same', activation = 'relu'))
+    model.add(Convolution2D(filters = 32, kernel_size = (1, 1), activation = 'relu'))
     model.add(Convolution2D(filters = channels, padding = 'same', kernel_size = (5, 5)))
     model.compile(optimizer, 'mse')
     

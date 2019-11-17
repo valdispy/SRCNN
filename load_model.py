@@ -5,8 +5,7 @@ Created on Fri Nov 15 00:12:47 2019
 @author: valdis
 """
 
-import cv2
-import numpy as np
+import cv2, numpy as np
 from keras.models import load_model
 
 def predict_image(model, image_path): 
@@ -39,5 +38,9 @@ if __name__ == "__main__":
     cv2.imwrite(predict_image_path, predicted_image)
     
     original_image = cv2.imread(original_image_path)
+    cv2.putText(original_image, 'original image', (20, 40), cv2.FONT_HERSHEY_SIMPLEX, 1.0, (255, 255, 255), 2)
+    cv2.putText(upscaled_image, 'upscaled image (scale = 4)', (20, 40), cv2.FONT_HERSHEY_SIMPLEX, 1.0, (255, 255, 255), 2)
+    cv2.putText(predicted_image, 'predicted image', (20, 40), cv2.FONT_HERSHEY_SIMPLEX, 1.0, (255, 255, 255), 2)
+        
     concatenated_image = np.concatenate((original_image, upscaled_image, predicted_image), axis=1)
     cv2.imwrite(merge_image_path, concatenated_image)

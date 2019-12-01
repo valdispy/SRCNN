@@ -33,8 +33,7 @@ def _prepare_datasets(file_list):
                         .shuffle(buffer_size=BUFFER_SIZE).repeat()\
                         .prefetch(buffer_size=tf.data.experimental.AUTOTUNE)
 
-def create_model():
-    optimizer = Adam(learning_rate=BASE_RATE, beta_1=0.9, beta_2=0.999, amsgrad=False)
+def create_model(optimizer):
     model = tf.keras.models.Sequential([
         tf.keras.layers.Conv2D(filters=64, kernel_size=7, padding='same', activation=tf.keras.activations.relu),
         tf.keras.layers.Conv2D(filters=32, kernel_size=1, activation=tf.keras.activations.relu),
@@ -51,7 +50,9 @@ if __name__ == "__main__":
     train_data = _prepare_datasets(train_list)
     validation_data = _prepare_datasets(validation_list)
     
-    model = create_model()    
+    optimizer = Adam(learning_rate=BASE_RATE, beta_1=0.9, beta_2=0.999, amsgrad=False)
+    model = create_model(optimizer)
+    
     history = model.fit(train_data, epochs=EPOCHS, verbose=1, validation_data=validation_data,
                          steps_per_epoch=int(train_number/float(BATCH_SIZE)), validation_steps=int(validation_number/float(BATCH_SIZE)))
     model.save('result.h5')

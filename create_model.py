@@ -4,7 +4,7 @@ Created on Thu Nov 21 23:55:53 2019
 
 @author: valdis
 """
-#import decays
+
 from re import findall
 from tensorflow.keras.optimizers import Adam
 import tensorflow as tf, glob

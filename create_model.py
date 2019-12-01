@@ -4,10 +4,8 @@ Created on Thu Nov 21 23:55:53 2019
 
 @author: valdis
 """
-
-from re import findall
-from tensorflow.keras.optimizers import Adam
 import tensorflow as tf, glob
+from tensorflow.keras.optimizers import Adam
 
 EPOCHS=30; BASE_RATE=1e-3
 CROP_HEIGHT=200; CROP_WIDTH=300; CHANNELS=3
